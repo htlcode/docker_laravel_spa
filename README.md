@@ -21,8 +21,8 @@
 
 1. リポジトリをクローンします:
    ```bash
-   git clone <repository-url>
-   cd <repository-folder>
+   git clone git@github.com:htlcode/docker_laravel_spa.git
+   cd docker_laravel_spa
    ```
 
 2. 環境を起動します:
