@@ -1,0 +1,55 @@
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server ipv6only=on;
+    server_name _;
+
+    root  /var/www/html;
+    index index.html;
+
+    access_log /var/log/nginx/access.log;
+    error_log  /var/log/nginx/error.log;
+}
+
+server {
+    listen       80;
+    server_name  ${NGINX_BACK_DOMAIN};
+
+    root /var/www/${NGINX_BACK_FOLDER}/public;
+    index index.php index.html index.htm;
+    charset utf-8;
+
+    location / {
+
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+        
+    location ~* \.php$ { 
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+        fastcgi_pass php-upstream;
+        fastcgi_index index.php;
+        include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+    }
+
+    error_log /var/log/nginx/back-error.log;
+    access_log /var/log/nginx/back-access.log;
+}
+
+server {
+    listen 80;
+    server_name ${NGINX_FRONT_DOMAIN};
+    charset utf-8;
+
+    location / {
+        proxy_pass http://host.docker.internal:${NGINX_FRONT_PORT};
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_intercept_errors on;
+    }
+
+    error_log  /var/log/nginx/front-error.log;
+    access_log /var/log/nginx/front-access.log;
+}
