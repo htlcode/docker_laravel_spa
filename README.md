@@ -1,4 +1,4 @@
-# Dockerの開発環境 
+# Dockerの開発環境のテンプレート
 
 - Nginx
 - Mysql
@@ -16,7 +16,7 @@
   - **nginx/**: Nginxの設定やスクリプトが含まれます。
   - **php-fpm/**: PHPの設定やスクリプトが含まれます。
 - **docker-compose.yml**: メインのDocker Composeファイルです。
-- **src**: 自分のソースフォルダの例
+- **src**: 自分のソースフォルダ (作成する必要あります)
   - **backend**
   - **frontend**
 
