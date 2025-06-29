@@ -40,13 +40,13 @@
 docker-compose.ymlの下記の変数を修正：
 Gas Maskで設定したlocalドメインと書き換えしましょう。
 
-  ```bash
-　- VIRTUAL_HOST=domain1.com,domain2.com
-　- NGINX_BACK_DOMAIN=domain1.com
-　- NGINX_BACK_FOLDER=domain1
-　- NGINX_FRONT_DOMAIN=domain2.com
-　- NGINX_FRONT_PORT=5173
-  ```
+   ```bash
+    - VIRTUAL_HOST=domain1.com,domain2.com
+    - NGINX_BACK_DOMAIN=domain1.com
+    - NGINX_BACK_FOLDER=domain1
+    - NGINX_FRONT_DOMAIN=domain2.com
+    - NGINX_FRONT_PORT=5173
+   ```
 
 6. 環境を起動します:
    ```bash
